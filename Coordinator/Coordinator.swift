@@ -65,7 +65,6 @@ protocol CoordinatableView: View, DoneReporter {}
 protocol CoordinatableViewWithPayload: View, DoneWithPayloadReporter {}
  
 struct Screen1: CoordinatableView {
-    typealias Payload = Any
     let buttonText: String
     
     var done: () -> Void
@@ -98,7 +97,6 @@ struct Screen2: CoordinatableViewWithPayload {
 }
  
 struct Screen3: CoordinatableView {
-    typealias Payload = Any
  
     var done: () -> Void
     
