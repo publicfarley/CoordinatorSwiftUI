@@ -13,6 +13,7 @@
 		B453B548235F645D00C20614 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B453B547235F645D00C20614 /* Assets.xcassets */; };
 		B453B54B235F645D00C20614 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B453B54A235F645D00C20614 /* Preview Assets.xcassets */; };
 		B453B54E235F645D00C20614 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B453B54C235F645D00C20614 /* LaunchScreen.storyboard */; };
+		B453B556235F649500C20614 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B453B555235F649500C20614 /* Coordinator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		B453B54A235F645D00C20614 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		B453B54D235F645D00C20614 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B453B54F235F645D00C20614 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B453B555235F649500C20614 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +65,7 @@
 				B453B54C235F645D00C20614 /* LaunchScreen.storyboard */,
 				B453B54F235F645D00C20614 /* Info.plist */,
 				B453B549235F645D00C20614 /* Preview Content */,
+				B453B555235F649500C20614 /* Coordinator.swift */,
 			);
 			path = Coordinator;
 			sourceTree = "<group>";
@@ -146,6 +149,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B453B556235F649500C20614 /* Coordinator.swift in Sources */,
 				B453B542235F645700C20614 /* AppDelegate.swift in Sources */,
 				B453B544235F645800C20614 /* SceneDelegate.swift in Sources */,
 				B453B546235F645800C20614 /* ContentView.swift in Sources */,
