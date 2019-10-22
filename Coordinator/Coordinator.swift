@@ -130,3 +130,10 @@ struct Screen3: CoordinatableView {
         }
     }
 }
+
+
+struct MainCoordinator_Previews: PreviewProvider {
+    static var previews: some View {
+        MainCoordinator()
+    }
+}
