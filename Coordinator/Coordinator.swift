@@ -11,6 +11,10 @@ import SwiftUI
  
 struct MainCoordinator: View {
     
+    @State private var food: [String] = []
+    static let timer = Timer.publish(every: 3, on: .main, in: .common).autoconnect()
+
+    
     enum Screen: Int {
         case first
         case second
@@ -18,7 +22,7 @@ struct MainCoordinator: View {
     }
     
     @State var screen: Screen = .first
-    @State var buttonText: String = "Go!"
+    @State var buttonText: String = "✨Go✨"
         
     var body: some View {
         VStack {
@@ -29,9 +33,12 @@ struct MainCoordinator: View {
                 Screen2(doneWithPayload: self.screen2Done)
                     .transition(.forwardScreenTransition)
             } else if self.screen.rawValue == 2 {
-                Screen3(done: self.screen3Done)
+                Screen3(items: $food, done: self.screen3Done)
                     .transition(.forwardScreenTransition)
             }
+        }.onReceive(MainCoordinator.timer) { _ in
+            let numberOfItems = Int.random(in: 1..<10)
+            self.food = Array(repeating: "🥝 Yummy!", count: numberOfItems)
         }
     }
         
@@ -72,7 +79,7 @@ struct Screen1: View {
                     Text(buttonText)
                         .multilineTextAlignment(.center)
                     Image(systemName: "tornado")
-                }.font(.title)
+                }.font(.largeTitle)
             }
             
             Spacer()
@@ -88,7 +95,7 @@ struct Screen2: View {
         VStack {
             Text("Screen2").font(.title)
             Button(action: {
-                self.doneWithPayload("Let's Go Again!")
+                self.doneWithPayload("Go Again!")
             }) {
                 Text("Go to the tabs!")
             }
@@ -97,7 +104,8 @@ struct Screen2: View {
 }
  
 struct Screen3: View {
- 
+    @Binding var items: [String]
+
     var done: () -> Void
     
     var body: some View {
@@ -121,11 +129,14 @@ struct Screen3: View {
                     Text("Second")
             }
  
-            Text("Tab 3")
-                .font(.largeTitle)
-                .tabItem {
-                    Image(systemName: "3.square.fill")
-                    Text("Third")
+            VStack {
+                Text("Tab 3")
+                    .font(.largeTitle)
+                MyTable(items: $items)
+            }
+            .tabItem {
+                Image(systemName: "3.square.fill")
+                Text("Third")
             }
         }
     }
@@ -151,5 +162,17 @@ extension AnyTransition {
         let removal = AnyTransition.move(edge: .trailing).combined(with: .opacity)
         
         return .asymmetric(insertion: insertion, removal: removal)
+    }
+}
+
+struct MyTable: View {
+    @Binding var items: [String]
+    
+    var body: some View {
+        List {
+            ForEach(items, id: \.self) { item in
+                Text("\(item)")
+            }
+        }
     }
 }
