@@ -54,19 +54,7 @@ struct MainCoordinator: View {
         }
     }
 }
- 
-protocol DoneWithPayloadReporter {
-    associatedtype Payload
-    var doneWithPayload: (Payload) -> Void { get }
-}
- 
-protocol DoneReporter {
-    var done: () -> Void { get }
-}
-
-protocol CoordinatableView: View, DoneReporter {}
-protocol CoordinatableViewWithPayload: View, DoneWithPayloadReporter {}
- 
+  
 struct Screen1: View {
     let buttonText: String
     
@@ -152,17 +140,16 @@ struct MainCoordinator_Previews: PreviewProvider {
 
 extension AnyTransition {
     static var forwardScreenTransition: AnyTransition {
-        let insertion = AnyTransition.move(edge: .leading).combined(with: .opacity)
-        let removal = AnyTransition.move(edge: .trailing).combined(with: .opacity)
-        
-        return .asymmetric(insertion: insertion, removal: removal)
-    }
-    
-    static var backwardScreenTransition: AnyTransition {
         let insertion = AnyTransition.move(edge: .trailing).combined(with: .opacity)
         let removal = AnyTransition.move(edge: .leading).combined(with: .opacity)
 
         return .asymmetric(insertion: insertion, removal: removal)
     }
 
+    static var backwardScreenTransition: AnyTransition {
+        let insertion = AnyTransition.move(edge: .leading).combined(with: .opacity)
+        let removal = AnyTransition.move(edge: .trailing).combined(with: .opacity)
+        
+        return .asymmetric(insertion: insertion, removal: removal)
+    }
 }
