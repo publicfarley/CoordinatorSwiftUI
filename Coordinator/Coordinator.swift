@@ -11,7 +11,7 @@ import SwiftUI
  
 struct MainCoordinator: View {
     
-    enum Screen {
+    enum Screen: Int {
         case first
         case second
         case third
@@ -21,34 +21,37 @@ struct MainCoordinator: View {
     @State var buttonText: String = "Go!"
         
     var body: some View {
-        currentView()
-    }
-    
-    func currentView() -> AnyView {
-        switch screen {
-        case .first:
-            return AnyView(Screen1(buttonText: "\(buttonText)",
-                                   done: screen1Done))
-        case .second:
-            return AnyView(Screen2(doneWithPayload: screen2Done))
-        
-        case .third:
-            return AnyView(Screen3(done: screen3Done))
+        VStack {
+            if self.screen.rawValue == 0 {
+                Screen1(buttonText: "\(self.buttonText)", done: self.screen1Done)
+                .transition(.backwardScreenTransition)
+            } else if self.screen.rawValue == 1 {
+                Screen2(doneWithPayload: self.screen2Done)
+                    .transition(.forwardScreenTransition)
+            } else if self.screen.rawValue == 2 {
+                Screen3(done: self.screen3Done)
+                    .transition(.forwardScreenTransition)
+            }
         }
-        
     }
-    
+        
     func screen1Done() {
-        screen = .second
+        withAnimation {
+            screen = .second
+        }
     }
     
     func screen2Done(with payLoad: String) {
-        buttonText = payLoad
-        screen = .third
+        withAnimation {
+            buttonText = payLoad
+            screen = .third
+        }
     }
     
     func screen3Done() {
-        screen = .first
+        withAnimation {
+            screen = .first
+        }
     }
 }
  
@@ -64,23 +67,32 @@ protocol DoneReporter {
 protocol CoordinatableView: View, DoneReporter {}
 protocol CoordinatableViewWithPayload: View, DoneWithPayloadReporter {}
  
-struct Screen1: CoordinatableView {
+struct Screen1: View {
     let buttonText: String
     
     var done: () -> Void
     
     var body: some View {
-        Button(action: done) {
-            VStack {
-                Text(buttonText)
-                    .multilineTextAlignment(.center)
-                Image(systemName: "tornado")
-            }.font(.title)
+        VStack(spacing: 20) {
+            Text("Home Screen")
+                .font(.largeTitle)
+            
+            Spacer()
+            
+            Button(action: done) {
+                VStack {
+                    Text(buttonText)
+                        .multilineTextAlignment(.center)
+                    Image(systemName: "tornado")
+                }.font(.title)
+            }
+            
+            Spacer()
         }
     }
 }
  
-struct Screen2: CoordinatableViewWithPayload {
+struct Screen2: View {
     
     var doneWithPayload: (String) -> Void
     
@@ -96,7 +108,7 @@ struct Screen2: CoordinatableViewWithPayload {
     }
 }
  
-struct Screen3: CoordinatableView {
+struct Screen3: View {
  
     var done: () -> Void
     
@@ -136,4 +148,21 @@ struct MainCoordinator_Previews: PreviewProvider {
     static var previews: some View {
         MainCoordinator()
     }
+}
+
+extension AnyTransition {
+    static var forwardScreenTransition: AnyTransition {
+        let insertion = AnyTransition.move(edge: .leading).combined(with: .opacity)
+        let removal = AnyTransition.move(edge: .trailing).combined(with: .opacity)
+        
+        return .asymmetric(insertion: insertion, removal: removal)
+    }
+    
+    static var backwardScreenTransition: AnyTransition {
+        let insertion = AnyTransition.move(edge: .trailing).combined(with: .opacity)
+        let removal = AnyTransition.move(edge: .leading).combined(with: .opacity)
+
+        return .asymmetric(insertion: insertion, removal: removal)
+    }
+
 }
