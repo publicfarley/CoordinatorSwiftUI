@@ -11,10 +11,9 @@ import SwiftUI
  
 struct MainCoordinator: View {
     
-    @State private var food: [String] = []
-    static let timer = Timer.publish(every: 3, on: .main, in: .common).autoconnect()
+    @EnvironmentObject private var data: Data
+    static let timer = Timer.publish(every: 1.5, on: .main, in: .common).autoconnect()
 
-    
     enum Screen: Int {
         case first
         case second
@@ -22,23 +21,22 @@ struct MainCoordinator: View {
     }
     
     @State var screen: Screen = .first
-    @State var buttonText: String = "✨Go✨"
         
     var body: some View {
         VStack {
-            if self.screen.rawValue == 0 {
-                Screen1(buttonText: "\(self.buttonText)", done: self.screen1Done)
+            if self.screen.rawValue == Screen.first.rawValue {
+                Screen1(done: self.screen1Done)
                 .transition(.backwardScreenTransition)
-            } else if self.screen.rawValue == 1 {
-                Screen2(doneWithPayload: self.screen2Done)
+            } else if self.screen.rawValue == Screen.second.rawValue {
+                Screen2(done: self.screen2Done)
                     .transition(.forwardScreenTransition)
-            } else if self.screen.rawValue == 2 {
-                Screen3(items: $food, done: self.screen3Done)
+            } else if self.screen.rawValue == Screen.third.rawValue {
+                Screen3(items: $data.food, done: self.screen3Done)
                     .transition(.forwardScreenTransition)
             }
         }.onReceive(MainCoordinator.timer) { _ in
             let numberOfItems = Int.random(in: 1..<10)
-            self.food = Array(repeating: "🥝 Yummy!", count: numberOfItems)
+            self.data.food = Array(repeating: "🥝 Yummy!", count: numberOfItems)
         }
     }
         
@@ -48,9 +46,8 @@ struct MainCoordinator: View {
         }
     }
     
-    func screen2Done(with payLoad: String) {
+    func screen2Done() {
         withAnimation {
-            buttonText = payLoad
             screen = .third
         }
     }
@@ -63,8 +60,6 @@ struct MainCoordinator: View {
 }
   
 struct Screen1: View {
-    let buttonText: String
-    
     var done: () -> Void
     
     var body: some View {
@@ -76,7 +71,7 @@ struct Screen1: View {
             
             Button(action: done) {
                 VStack {
-                    Text(buttonText)
+                    Text("✨Go✨")
                         .multilineTextAlignment(.center)
                     Image(systemName: "tornado")
                 }.font(.largeTitle)
@@ -89,13 +84,13 @@ struct Screen1: View {
  
 struct Screen2: View {
     
-    var doneWithPayload: (String) -> Void
+    var done: () -> Void
     
     var body: some View {
         VStack {
             Text("Screen2").font(.title)
             Button(action: {
-                self.doneWithPayload("Go Again!")
+                self.done()
             }) {
                 Text("Go to the tabs!")
             }

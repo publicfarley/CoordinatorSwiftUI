@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B43D686A238ADE1300389539 /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = B43D6869238ADE1300389539 /* Data.swift */; };
 		B453B542235F645700C20614 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B453B541235F645700C20614 /* AppDelegate.swift */; };
 		B453B544235F645800C20614 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B453B543235F645800C20614 /* SceneDelegate.swift */; };
 		B453B548235F645D00C20614 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B453B547235F645D00C20614 /* Assets.xcassets */; };
@@ -16,6 +17,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		B43D6869238ADE1300389539 /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
 		B453B53E235F645700C20614 /* Coordinator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Coordinator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B453B541235F645700C20614 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B453B543235F645800C20614 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -24,6 +26,7 @@
 		B453B54D235F645D00C20614 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B453B54F235F645D00C20614 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B453B555235F649500C20614 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
+		B49E628D236B2B2800B242E3 /* Coordinator.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Coordinator.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,8 +59,10 @@
 		B453B540235F645700C20614 /* Coordinator */ = {
 			isa = PBXGroup;
 			children = (
+				B49E628D236B2B2800B242E3 /* Coordinator.entitlements */,
 				B453B541235F645700C20614 /* AppDelegate.swift */,
 				B453B543235F645800C20614 /* SceneDelegate.swift */,
+				B43D6869238ADE1300389539 /* Data.swift */,
 				B453B547235F645D00C20614 /* Assets.xcassets */,
 				B453B54C235F645D00C20614 /* LaunchScreen.storyboard */,
 				B453B54F235F645D00C20614 /* Info.plist */,
@@ -149,6 +154,7 @@
 				B453B556235F649500C20614 /* Coordinator.swift in Sources */,
 				B453B542235F645700C20614 /* AppDelegate.swift in Sources */,
 				B453B544235F645800C20614 /* SceneDelegate.swift in Sources */,
+				B43D686A238ADE1300389539 /* Data.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -284,9 +290,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Coordinator/Coordinator.entitlements;
 				CODE_SIGN_STYLE = Automatic;
+				DERIVE_MACCATALYST_PRODUCT_BUNDLE_IDENTIFIER = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"Coordinator/Preview Content\"";
-				DEVELOPMENT_TEAM = X9LH3DPWJC;
+				DEVELOPMENT_TEAM = 9LDVM5K5D7;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Coordinator/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -295,6 +303,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.appobject.Coordinator;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTS_MACCATALYST = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -304,9 +313,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Coordinator/Coordinator.entitlements;
 				CODE_SIGN_STYLE = Automatic;
+				DERIVE_MACCATALYST_PRODUCT_BUNDLE_IDENTIFIER = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"Coordinator/Preview Content\"";
-				DEVELOPMENT_TEAM = X9LH3DPWJC;
+				DEVELOPMENT_TEAM = 9LDVM5K5D7;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Coordinator/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -315,6 +326,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.appobject.Coordinator;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTS_MACCATALYST = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
