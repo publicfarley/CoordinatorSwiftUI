@@ -21,13 +21,13 @@ struct MainCoordinator: View {
         
     var body: some View {
         VStack {
-            if self.screen.rawValue == Screen.first.rawValue {
+            if screen.isEqualTo(Screen.first) {
                 Screen1(done: self.screen1Done)
                 .transition(.backwardScreenTransition)
-            } else if self.screen.rawValue == Screen.second.rawValue {
+            } else if screen.isEqualTo(Screen.second) {
                 Screen2(done: self.screen2Done)
                     .transition(.forwardScreenTransition)
-            } else if self.screen.rawValue == Screen.third.rawValue {
+            } else if screen.isEqualTo(Screen.third) {
                 // Return a sub-coordinator instead of a screen
                 Screen3Coordinator(done: self.screen3Done)
             }
@@ -76,3 +76,12 @@ extension AnyTransition {
     }
 }
 
+extension Equatable {
+    func isEqualTo<T: Equatable>(_ otherCondtruct: T) -> Bool {
+        guard let thisConstruct = self as? T else {
+            return false
+        }
+       
+        return thisConstruct == otherCondtruct
+    }
+}
